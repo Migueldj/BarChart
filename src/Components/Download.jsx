@@ -6,6 +6,8 @@ import PDF from "../Assets/pdf-icon.svg"
 import IMAGE from "../Assets/image-icon.svg"
 import ARROW from "../Assets/arrow-icon.svg"
 
+let { matches } = window.matchMedia("(max-width: 992px)");
+
 export const Download = ({ chart }) => {
   const handleDownloadImg = async () => {
     console.log("Haz dado click en el botón de descarga");
@@ -17,7 +19,7 @@ export const Download = ({ chart }) => {
 
     if (typeof link.download === "string") {
       link.href = data;
-      link.download = "image.jpg";
+      link.download = "chart.jpg";
 
       document.body.appendChild(link);
       link.click();
@@ -34,10 +36,10 @@ export const Download = ({ chart }) => {
 
     const data = canvas.toDataURL("image/jpg");
     const pdf = new jsPdf({
-      orientation: "landscape",
+      orientation: `${matches ? "portrait": "landscape"}`,
     });
     pdf.addImage(data, "JPEG", 0, 0);
-    pdf.save(`${new Date().toISOString()}.pdf`);
+    pdf.save(`chart.pdf`);
   };
 
   return (

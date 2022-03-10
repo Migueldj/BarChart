@@ -6,8 +6,6 @@ export const Filter = ({ filters, setFilters, info }) => {
   const [checked, setChecked] = useState([]);
   const [dropDownActive, setDropDownActive] = useState(true);
 
-  let { matches } = window.matchMedia("(max-width: 992px)");
-
   useEffect(() => {
     setChecked(new Array(info.length).fill(true));
   }, [info]);
